@@ -22,24 +22,10 @@ app.use((req, res, next) => { //definition de headers spécifiques pour permettr
     next();
   });
 
-app.use((req, res, next) => {
-  console.log('Requête reçue !');
-  next();
-});
-
-app.use((req, res, next) => {
-  res.status(201);
-  next();
-});
-
-
-app.use((req, res, next) => {
-  console.log('Réponse envoyée avec succès !');
-});
 
 app.use(express.json()); //équivalent bodyparser
 
-app.use('/api/sauce', sauceRoutes);
+app.use('/api/sauces', sauceRoutes);
 app.use('/api/auth', userRoutes);
 app.use('/images', express.static(path.join(__dirname,'images')));
 
