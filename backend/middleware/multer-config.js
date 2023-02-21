@@ -1,12 +1,15 @@
+//Gestion des requetes http avec envoi de fichier-images
+//Import package multer
 const multer = require('multer');
 
-const MIME_TYPES = { //dictionnaire extension
+//dictionnaire d'extensions MIME_TYPES
+const MIME_TYPES = { 
   'image/jpg': 'jpg',
   'image/jpeg': 'jpg',
   'image/png': 'png'
 };
-
-const storage = multer.diskStorage({//configure chemin et nom de fichier
+//configure chemin et nom de fichier
+const storage = multer.diskStorage({
   //enregistrement dans dossier images
   destination: (req, file, callback) => {
     callback(null, 'images'); 

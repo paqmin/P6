@@ -30,14 +30,17 @@ exports.login = (req, res, next) => {
                     }
                     res.status(200).json({
                         userId: user._id,
-                        token: jwt.sign( //fonction sign de jsonwebtoken pr chiffrer un nouveau token
-                            { userId: user._id },
-                            'RANDOM_TOKEN_SECRET',
+                        //fonction sign de jsonwebtoken pr chiffrer un nouveau token
+                        token: jwt.sign( 
+                            { userId: user._id }, //ID de l'utilisateur
+                            'RANDOM_TOKEN_SECRET', //chaine secrete pour crypter token
                             { expiresIn: '24h' }//duree de validité 24h
                         )
                     });
                 })
-                .catch(error => res.status(500).json({ error }));
+                .catch(error => res.status(500).json({ 
+                    message: "Echec d'authentification",
+                    error : error }));
         })
         .catch(error => res.status(500).json({ error }));
  };

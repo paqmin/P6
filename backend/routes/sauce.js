@@ -1,20 +1,40 @@
+//Importation d'Express
 const express = require('express');
 
+// Appel d'express pour créer router
 const router = express.Router();
-//import modèle sauce
+
+//import controller sauce
 const sauceCtrl = require('../controllers/sauce'); 
+
+//Import controller like :
+const likeCtrl = require("../controllers/like")
+
 
 //import middleware qui gère l'authentification
 const auth = require('../middleware/auth');
-//multer pour sauvegarder images sur le serveur
+
+//import du middleware multer pour sauvegarder images sur le serveur
 const multer = require('../middleware/multer-config'); 
 
 //routes CRUD
-router.get('/', auth, sauceCtrl.getAllSauce);//route qui récupère toutes les sauces
-router.get('/:id', auth, sauceCtrl.getOneSauce); // route qui récupère 1 seule sauce
-router.post('/', auth, multer, sauceCtrl.createSauce); //route pour créer une sauce
-router.put('/:id', auth, multer, sauceCtrl.modifySauce); // route pour modifier une sauce
-router.delete('/:id', auth, sauceCtrl.deleteSauce); // route pour supprimer une sauce
-//router.post('/:id/like', auth, sauceCtrl.likeOrDislike);
+//route qui récupère toutes les sauces - GET
+router.get('/', auth, sauceCtrl.getAllSauce);
 
+// route qui récupère 1 seule sauce - GET
+router.get('/:id', auth, sauceCtrl.getOneSauce); 
+
+//route pour créer une sauce - POST
+router.post('/', auth, multer, sauceCtrl.createSauce); 
+
+// route pour modifier une sauce - PUT
+router.put('/:id', auth, multer, sauceCtrl.modifySauce); 
+
+// route pour supprimer une sauce - DELETE
+router.delete('/:id', auth, sauceCtrl.deleteSauce); 
+
+// route like sauce - LIKE
+router.post('/:id/like', auth, likeCtrl.likeSauce);
+
+//Exportation des routes pour les sauces - sauce.js
 module.exports = router;
