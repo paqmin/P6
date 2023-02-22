@@ -33,7 +33,7 @@ exports.login = (req, res, next) => {
                         //fonction sign de jsonwebtoken pr chiffrer un nouveau token
                         token: jwt.sign( 
                             { userId: user._id }, //ID de l'utilisateur
-                            'RANDOM_TOKEN_SECRET', //chaine secrete pour crypter token
+                            process.env.TOKEN_KEY, //chaine secrete pour crypter token
                             { expiresIn: '24h' }//duree de validité 24h
                         )
                     });

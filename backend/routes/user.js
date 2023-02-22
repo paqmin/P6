@@ -4,10 +4,14 @@ const express = require('express');
 const router = express.Router(); 
 
 //importation du controller user.js
-const userCtrl = require('../controllers/user');//controllers
+const userCtrl = require('../controllers/user');
+
+//import middleware qui gère l'authentification
+const PassWord = require('../middleware/pass');
 
 //Route POST - signup
-router.post('/signup', userCtrl.signup); 
+router.post('/signup', PassWord, userCtrl.signup); 
+
 //Route POST - login
 router.post('/login', userCtrl.login);//méthode login
 

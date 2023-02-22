@@ -10,9 +10,12 @@ const path = require('path');
 const sauceRoutes = require('./routes/sauce');
 const userRoutes = require ('./routes/user');
 
+//SECURITE
 //Importation de dotenv pour les variables d'environement :
 const dotenv = require("dotenv");
 dotenv.config();
+const helmet = require("helmet");
+const rateLimit = require('express-rate-limit');
 
 //connexion à MongoDB Atlas
 mongoose.set('strictQuery', true);
@@ -20,6 +23,18 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASS
     { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch(() => console.log('Connexion à MongoDB échouée !'))
+
+// Helmet middleware - panoplie d'actions de sécurité
+app.use(helmet());
+
+// express-rate-limit middleware qui sécurise le nombre de requête sur l'API
+const apilimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, //15min
+  max: 100,// limite chaque requête par IP à 100
+  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+});
+app.use(apilimiter); 
 
 //definition de headers spécifiques pour permettre des requêtes cross.origin - CORS
 app.use((req, res, next) => { 

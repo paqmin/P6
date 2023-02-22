@@ -76,3 +76,82 @@ exports.deleteSauce = (req, res, next) => {
         res.status(500).json({ error });
     });
 };
+//gestion des likes et dislikes - POST
+exports.likeSauce = (req, res, next) => { 
+   
+  //contenu de la requête like dislike envoyé par le navigateur
+  const SauceObject = req.body;
+  const sauceId = req.params.id;
+  const userId  = req.body.userId;
+  const Like = req.body.like;
+  const DisLike = req.body.dislike;
+
+  
+  //sélection de la sauce
+  Sauce.findOne({_id: sauceId})
+  .then((sauce) => {      
+    const userAlreadyLiked = sauce.usersLiked.includes(userId);
+    const userAlreadyDisliked = sauce.usersDisliked.includes(userId);
+
+      //ajout like 
+      if((!userAlreadyLiked) && (Like === 1) ) {
+          Sauce.updateOne(
+            //filter
+            { _id: sauceId }, 
+            //update
+            { $inc: {
+              likes : 1,
+              dislikes: 0,}, 
+            $push: { usersLiked : userId},
+            $pull: { usersDisliked: userId },
+          })
+          .then(() => res.status(201).json({ message: `Vous avez aimé la sauce ${sauce.name}`}))
+          .catch((error) => {res.status(400).json({ error })});
+      } 
+      // ajout dislike
+      if ((!userAlreadyDisliked ) && (Like === -1) ) {
+        Sauce.updateOne(
+          { _id: sauceId }, 
+          { $inc: {
+            dislikes : 1,
+            likes: 0,}, 
+          $push: { usersDisliked : userId},
+          $pull: { usersliked: userId },
+        })
+        .then(() => res.status(200).json({ message: `Vous n'avez pas aimé la sauce ${sauce.name}`}))
+        .catch((error) => {res.status(400).json({ error })});
+
+      }  
+      //retrait like 
+      if ((userAlreadyLiked) && (Like === 0)) {
+        Sauce.updateOne(
+          { _id: sauceId }, 
+          { $inc: {
+            likes: -1,
+          }, 
+          $pull: { usersLiked : userId, usersDisliked: userId },
+        })
+        .then(() => res.status(200).json({ message: `Vous avez enlevé votre 'like' de la sauce ${sauce.name}`}))
+        .catch((error) => {res.status(400).json({ error })});
+      } 
+      //retrait dislike 
+      if ((userAlreadyDisliked ) && (Like === 0)) {
+        Sauce.updateOne(
+          { _id: sauceId }, 
+          { $inc: {
+            dislikes: -1,
+          }, 
+          $pull: { usersLiked : userId, usersDisliked: userId },
+        })
+        .then(() => res.status(200).json({ message: `Vous avez enlevé votre dislike de la sauce ${sauce.name}`}))
+        .catch((error) => {res.status(400).json({ error })});
+      } 
+
+     
+      
+  })  
+  .catch((error) => {
+    console.log(error);
+    res.status(404).json({error})});
+};
+

@@ -4,18 +4,14 @@ const express = require('express');
 // Appel d'express pour créer router
 const router = express.Router();
 
-//import controller sauce
-const sauceCtrl = require('../controllers/sauce'); 
-
-//Import controller like :
-const likeCtrl = require("../controllers/like")
-
-
 //import middleware qui gère l'authentification
 const auth = require('../middleware/auth');
 
 //import du middleware multer pour sauvegarder images sur le serveur
 const multer = require('../middleware/multer-config'); 
+
+//import controller sauce
+const sauceCtrl = require('../controllers/sauce'); 
 
 //routes CRUD
 //route qui récupère toutes les sauces - GET
@@ -34,7 +30,7 @@ router.put('/:id', auth, multer, sauceCtrl.modifySauce);
 router.delete('/:id', auth, sauceCtrl.deleteSauce); 
 
 // route like sauce - LIKE
-router.post('/:id/like', auth, likeCtrl.likeSauce);
+router.post('/:id/like', auth, sauceCtrl.likeSauce);
 
 //Exportation des routes pour les sauces - sauce.js
 module.exports = router;

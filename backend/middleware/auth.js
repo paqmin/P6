@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
     //extraction token
        const token = req.headers.authorization.split(' ')[1];
     //decodage token
-       const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+       const decodedToken = jwt.verify(token, process.env.TOKEN_KEY);
      //méthode vérify permet de vérifier la validité d'un token  
        const userId = decodedToken.userId;
     //extraction de l'userID
