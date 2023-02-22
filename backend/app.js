@@ -25,7 +25,9 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASS
     .catch(() => console.log('Connexion à MongoDB échouée !'))
 
 // Helmet middleware - panoplie d'actions de sécurité
-app.use(helmet());
+app.use(helmet({
+  crossOriginResourcePolicy: false,
+}));
 
 // express-rate-limit middleware qui sécurise le nombre de requête sur l'API
 const apilimiter = rateLimit({

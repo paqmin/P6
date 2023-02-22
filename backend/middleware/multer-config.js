@@ -6,7 +6,8 @@ const multer = require('multer');
 const MIME_TYPES = { 
   'image/jpg': 'jpg',
   'image/jpeg': 'jpg',
-  'image/png': 'png'
+  'image/png': 'png',
+  'image/webp': 'webp'
 };
 //configure chemin et nom de fichier
 const storage = multer.diskStorage({
