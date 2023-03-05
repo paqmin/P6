@@ -4,10 +4,10 @@ Construisez une API sécurisée pour une application d'avis gastronomiques
 
 ## Technologies + plugins utilisés 
 
-• Angular (frontend)
-• Node.js
-• Express.js + Mongoose - MongoDB
-• Plugins sécurité : 
+- Angular (frontend)
+- Node.js
+- Express.js + Mongoose - MongoDB
+- Plugins sécurité : 
     - bcrypt (mot de passe)
     - dotenv
     - express rate limit
