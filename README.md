@@ -1,6 +1,6 @@
 # Projet 6 du parcours développeur Web :
 
-Construisez une API sécurisée pour une application d'avis gastronomiques
+# Construisez une API sécurisée pour une application d'avis gastronomiques
 
 ## Technologies + plugins utilisés 
 
