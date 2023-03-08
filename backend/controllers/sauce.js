@@ -83,8 +83,6 @@ exports.likeSauce = (req, res, next) => {
   const userId  = req.body.userId;
   const Like = req.body.like;
 
-
-  
   //sélection de la sauce
   Sauce.findOne({_id: sauceId})
   .then((sauce) => {      
@@ -144,9 +142,7 @@ exports.likeSauce = (req, res, next) => {
         .then(() => res.status(200).json({ message: `Vous avez enlevé votre dislike de la sauce ${sauce.name}`}))
         .catch((error) => {res.status(400).json({ error })});
       } 
-
-   res.status(400).json({message : `action impossible`})  
-      
+   
   })  
   .catch((error) => {
     console.log(error);
