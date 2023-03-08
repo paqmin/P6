@@ -11,9 +11,7 @@ exports.getOneSauce = (req, res, next) => {
 exports.getAllSauce = (req, res, next) => {
   Sauce.find()
     .then(sauces => res.status(200).json(sauces)) 
-    .catch(error => { console.log(error)
-    res.status(400).json({ error })}
-    );
+    .catch(error => { res.status(400).json({ error })});
 };
 //creation d'une sauce - POST
 exports.createSauce = (req, res, next) => {
@@ -45,7 +43,7 @@ exports.modifySauce = (req, res, next) => {
     Sauce.findOne({_id: req.params.id}) //recuperation de l'objet 
         .then((sauce) => {
             if (sauce.userId != req.auth.userId) { // si userID dif de celui du token : qq essaie de modifier un objet qui ne lui appartient pas
-                res.status(404).json({ message : 'Not authorized'});
+                res.status(403).json({ message : 'Not authorized'});
             } else { //si c'est bien le bon userId
                 Sauce.updateOne({ _id: req.params.id}, { ...sauceObject, _id: req.params.id})//envoi des nouvelles données
                 .then(() => res.status(200).json({message : 'Sauce modifiée!'}))
@@ -61,7 +59,7 @@ exports.deleteSauce = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id })
       .then(sauce => { 
         if (sauce.userId != req.auth.userId){//pas le même userID
-          res.status(404).json({ message : 'Not authorized'});
+          res.status(403).json({ message : 'Not authorized'});
         }else{//si même userID --suppression de l'image et de l'élement
           const filename = sauce.imageUrl.split('/images/')[1];
           fs.unlink(`images/${filename}`, () => {
@@ -80,11 +78,11 @@ exports.deleteSauce = (req, res, next) => {
 exports.likeSauce = (req, res, next) => { 
    
   //contenu de la requête like dislike envoyé par le navigateur
-  const SauceObject = req.body;
+ 
   const sauceId = req.params.id;
   const userId  = req.body.userId;
   const Like = req.body.like;
-  const DisLike = req.body.dislike;
+
 
   
   //sélection de la sauce
@@ -147,7 +145,7 @@ exports.likeSauce = (req, res, next) => {
         .catch((error) => {res.status(400).json({ error })});
       } 
 
-     
+   res.status(400).json({message : `action impossible`})  
       
   })  
   .catch((error) => {
