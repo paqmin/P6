@@ -4,6 +4,7 @@
 L'objectif de ce projet était de créer une API REST qui serve d’interface entre le front end d’une application d’évaluation de sauces piquantes et la base de données sous MongoDB avec Node.js, Express
 
 Les différentes fonctionnalités à mettre en place depuis le front-end étaient les suivantes : 
+
 ● la possibilité de créer un compte utilisateur : la route/endpoint SIGNUP
 ● la possibilité de se connecter et de disposer d'un token valide : la route/endpoint LOGIN
 ● de permettre à l'utilisateur d'effectuer les opérations suivantes :
