@@ -12,7 +12,7 @@ Les différentes fonctionnalités à mettre en place depuis le front-end étaien
     - ajouter une nouvelle sauce ;
     - modifier une sauce qu’il a créé ;
     - supprimer une sauce qu’il a créé  ;
-    - ajouter un like ou un dislike sur toutes les sauces du catalogue et modifier son choix ;
+    - ajouter un like ou un dislike sur toutes les sauces du catalogue et modifier son choix.
 
 ## Technologies + plugins utilisés 
 
