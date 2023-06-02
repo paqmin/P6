@@ -5,15 +5,14 @@ L'objectif de ce projet était de créer une API REST qui serve d’interface en
 
 Les différentes fonctionnalités à mettre en place depuis le front-end étaient les suivantes : 
 
-● la possibilité de créer un compte utilisateur : la route/endpoint SIGNUP
-● la possibilité de se connecter et de disposer d'un token valide : la route/endpoint LOGIN
-● de permettre à l'utilisateur d'effectuer les opérations suivantes :
-
-- voir toutes les sauces;
-- ajouter une nouvelle sauce ;
-- modifier une sauce qu’il a créé ;
-- supprimer une sauce qu’il a créé  ;
-- ajouter un like ou un dislike sur toutes les sauces du catalogue et modifier son choix ;
+- la possibilité de créer un compte utilisateur : la route/endpoint SIGNUP
+- la possibilité de se connecter et de disposer d'un token valide : la route/endpoint LOGIN
+- de permettre à l'utilisateur d'effectuer les opérations suivantes :
+    - voir toutes les sauces;
+    - ajouter une nouvelle sauce ;
+    - modifier une sauce qu’il a créé ;
+    - supprimer une sauce qu’il a créé  ;
+    - ajouter un like ou un dislike sur toutes les sauces du catalogue et modifier son choix ;
 
 ## Technologies + plugins utilisés 
 
