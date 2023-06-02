@@ -1,7 +1,7 @@
 # Projet 6 du parcours développeur Web :
 
 # Construisez une API sécurisée pour une application d'avis gastronomiques
-L'objectif de ce projet était de créer une API REST qui serve d’interface entre le front end d’une application d’évaluation de sauces piquantes et la base de données sous MongoDB avec Node.js, Express
+L'objectif de ce projet était de créer une API REST qui serve d’interface entre le front end d’une application d’évaluation de sauces piquantes et la base de données sous MongoDB avec Node.js, Express, et de la sécuriser selon les normes OWASP et RGPD.
 
 Les différentes fonctionnalités à mettre en place depuis le front-end étaient les suivantes : 
 
